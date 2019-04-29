@@ -1,4 +1,4 @@
-package Common
+package common
 
 type ReadRoomManager struct {
 	RoomName string

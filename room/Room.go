@@ -1,33 +1,33 @@
-package Room
+package room
 
 import (
-	"Chat/Common"
+	"Chat/common"
 	"fmt"
 	"time"
 )
 
 const RefreshTimeout  = 5 * time.Second // TODO: move this out of here
 
-func NotifyCloseStatusRoomManager(room *Common.Room){
-	room.Del<-&Common.DelRoomManager{RoomName: room.GetRoomName()}
+func NotifyCloseStatusRoomManager(room *common.Room){
+	room.Del<-&common.DelRoomManager{RoomName: room.GetRoomName()}
 }
 
-func CloseRoomChannels(room *Common.Room){
+func CloseRoomChannels(room *common.Room){
 	close(room.Read)
 	close(room.Write)
 	close(room.Ctrl)
 }
 
-func CtrlHandle(room *Common.Room, ctrlChan *Common.CtrlRoomChan) {
+func CtrlHandle(room *common.Room, ctrlChan *common.CtrlRoomChan) {
 	switch ctrlChan.Flag {
-	case Common.EnterRoom:
+	case common.EnterRoom:
 		room.AddClient()
-	case Common.ExitRoom:
+	case common.ExitRoom:
 		room.RemoveClient()
 	}
 }
 
-func Handler(room *Common.Room) {
+func Handler(room *common.Room) {
 	var messageArray []string
 	for {
 		select {

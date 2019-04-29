@@ -1,4 +1,4 @@
-package Common
+package common
 
 type ReadRoomChan struct {
 	ReadMode   int

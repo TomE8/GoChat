@@ -1,22 +1,22 @@
 package main
 
 import (
-	"Chat/Client"
-	"Chat/Common"
-	"Chat/RoomManager"
+	"Chat/client"
+	"Chat/common"
+	"Chat/roommanager"
 	"log"
 	"net"
 )
 
 func main() {
 
-	RMReadChan := make(chan *Common.ReadRoomManager)
-	RMDelChan := make(chan *Common.DelRoomManager)
-	roomManger := Common.RoomManger{Read: RMReadChan, Del: RMDelChan}
+	RMReadChan := make(chan *common.ReadRoomManager)
+	RMDelChan := make(chan *common.DelRoomManager)
+	roomManger := common.RoomManger{Read: RMReadChan, Del: RMDelChan}
 
-	go RoomManager.Handler(roomManger)
+	go roommanager.Handler(roomManger)
 
-	l, err := net.Listen("tcp", ":"+Common.Port)
+	l, err := net.Listen("tcp", ":"+common.Port)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -27,7 +27,7 @@ func main() {
 			log.Fatal(err)
 		}
 
-		go Client.Handler(c, &roomManger)
+		go client.Handler(c, &roomManger)
 	}
 	if err := l.Close(); err != nil {
 		log.Fatal(err)
