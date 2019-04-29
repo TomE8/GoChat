@@ -55,7 +55,7 @@ func ConnectionHandler(writeChan chan string, exitChan chan bool) {
 	var NumOfMessages = 0
 	conn, err := net.Dial("tcp", common.Ip+":"+common.Port)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	text := fmt.Sprintf("---> %s has enterd the room", UserName)
 	serverMessage = common.ClientCommand{RoomName: RoomName, Flag: common.EnterRoom, NumOfLines: 0, Content: text}
