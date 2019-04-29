@@ -23,12 +23,12 @@ func ParseClientCommand(c net.Conn) common.ClientCommand {
 
 	message, err := bufio.NewReader(c).ReadBytes('}')
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	var parsedMessage common.ClientCommand
 	err = json.Unmarshal(message, &parsedMessage)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	return parsedMessage
 }
