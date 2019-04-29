@@ -20,11 +20,11 @@ type ClientCommand struct {
 	Content    string
 }
 
-type ServerReturn struct {
+type ServerResponse struct {
 	Data []string
 }
 
-func (s ServerReturn) GetData() []string{
+func (s ServerResponse) GetData() []string{
 	return s.Data
 }
 

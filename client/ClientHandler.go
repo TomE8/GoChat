@@ -20,7 +20,7 @@ type RoomManagerI interface {
 }
 
 func SendDataToClient(c net.Conn, data []string) {
-	message := common.ServerReturn{Data: data}
+	message := common.ServerResponse{Data: data}
 	messageToSend, err := json.Marshal(message)
 	if err != nil {
 		log.Fatal(err)

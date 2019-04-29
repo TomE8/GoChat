@@ -32,7 +32,7 @@ func ReceiveFromServer(conn net.Conn) []string {
 	if err != nil {
 		log.Fatal(err)
 	}
-	var parsedMessage common.ServerReturn
+	var parsedMessage common.ServerResponse
 	err = json.Unmarshal(message, &parsedMessage)
 	if err != nil {
 		log.Fatal(err)
