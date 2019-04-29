@@ -1,25 +1,25 @@
 package common
 
-type ReadRoomChan struct {
+type ReadRoomMessage struct {
 	ReadMode   int
 	NumOfLines int
 	RespChan   chan []string
 }
 
-type WriteRoomChan struct {
+type WriteRoomMessage struct {
 	Flag    int
 	Message string
 }
 
-type CtrlRoomChan struct {
+type CtrlRoomMessage struct {
 	Flag int
 }
 
 type Room struct {
 	RoomName     string
-	Read         chan *ReadRoomChan
-	Write        chan *WriteRoomChan
-	Ctrl         chan *CtrlRoomChan
+	Read         chan *ReadRoomMessage
+	Write        chan *WriteRoomMessage
+	Ctrl         chan *CtrlRoomMessage
 	Del          chan *DelRoomManager
 	NumOfClients int
 }
@@ -28,7 +28,7 @@ func (r *Room) GetRoomName() string{
 	return r.RoomName
 }
 
-func (r *Room) GetReadChan() chan *ReadRoomChan{
+func (r *Room) GetReadChan() chan *ReadRoomMessage {
 	return r.Read
 }
 

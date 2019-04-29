@@ -18,7 +18,7 @@ func CloseRoomChannels(room *common.Room){
 	close(room.Ctrl)
 }
 
-func CtrlHandle(room *common.Room, ctrlChan *common.CtrlRoomChan) {
+func CtrlHandle(room *common.Room, ctrlChan *common.CtrlRoomMessage) {
 	switch ctrlChan.Flag {
 	case common.EnterRoom:
 		room.AddClient()

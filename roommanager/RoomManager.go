@@ -6,9 +6,9 @@ import (
 )
 
 func createNewRoom(c chan *common.DelRoomManager, roomName string) *common.Room {
-	roomReadChan := make(chan *common.ReadRoomChan)
-	roomWriteChan := make(chan *common.WriteRoomChan)
-	roomCtrlChan := make(chan *common.CtrlRoomChan)
+	roomReadChan := make(chan *common.ReadRoomMessage)
+	roomWriteChan := make(chan *common.WriteRoomMessage)
+	roomCtrlChan := make(chan *common.CtrlRoomMessage)
 	return &common.Room{RoomName: roomName,Read: roomReadChan, Write: roomWriteChan, Ctrl: roomCtrlChan, Del: c, NumOfClients: 0}
 }
 

@@ -50,17 +50,17 @@ func Handler(c net.Conn, roomManger *common.RoomManger) {
 		room := roomManger.GetRoom(clientCommand.GetRoomName())
 		switch clientCommand.GetFlag() {
 		case common.ExitRoom:
-			room.Write <- &common.WriteRoomChan{Flag: common.AppendMessage, Message: clientCommand.GetContent()}
-			room.Ctrl <- &common.CtrlRoomChan{Flag: common.ExitRoom}
+			room.Write <- &common.WriteRoomMessage{Flag: common.AppendMessage, Message: clientCommand.GetContent()}
+			room.Ctrl <- &common.CtrlRoomMessage{Flag: common.ExitRoom}
 			return
 		case common.EnterRoom:
-			room.Write <- &common.WriteRoomChan{Flag: common.AppendMessage, Message: clientCommand.GetContent()}
-			room.Ctrl <- &common.CtrlRoomChan{Flag: common.EnterRoom}
+			room.Write <- &common.WriteRoomMessage{Flag: common.AppendMessage, Message: clientCommand.GetContent()}
+			room.Ctrl <- &common.CtrlRoomMessage{Flag: common.EnterRoom}
 		case common.AppendMessage:
-			room.Write <- &common.WriteRoomChan{Flag: common.AppendMessage, Message: clientCommand.GetContent()}
+			room.Write <- &common.WriteRoomMessage{Flag: common.AppendMessage, Message: clientCommand.GetContent()}
 		case common.ReadAllMode, common.ReadFromEndMode:
 			RespChan := make(chan []string)
-			room.Read <- &common.ReadRoomChan{ReadMode: common.ReadMode, NumOfLines: clientCommand.GetNumOfLines(), RespChan: RespChan}
+			room.Read <- &common.ReadRoomMessage{ReadMode: common.ReadMode, NumOfLines: clientCommand.GetNumOfLines(), RespChan: RespChan}
 			messageArray := <-RespChan
 			if clientCommand.GetFlag() == common.ReadFromEndMode {
 				messageArray = messageArray[clientCommand.GetNumOfLines():]
