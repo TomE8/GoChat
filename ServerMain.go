@@ -2,8 +2,8 @@ package main
 
 import (
 	"Chat/Client"
-	"Chat/RoomManager"
 	"Chat/Common"
+	"Chat/RoomManager"
 	"log"
 	"net"
 )
@@ -29,9 +29,8 @@ func main() {
 
 		go Client.Handler(c, &roomManger)
 	}
-	if err := l.Close(); err!=nil{
+	if err := l.Close(); err != nil {
 		log.Fatal(err)
 	}
 
 }
-
