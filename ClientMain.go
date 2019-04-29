@@ -85,9 +85,7 @@ func ConnectionHandler(writeChan chan string, exitChan chan bool) {
 func main() {
 	exitChan := make(chan bool)
 	writeChan := make(chan string)
-	defer close(exitChan)
-	defer close(writeChan)
-
+	
 	go ConnectionHandler(writeChan, exitChan)
 
 	reader := bufio.NewReader(os.Stdin)
