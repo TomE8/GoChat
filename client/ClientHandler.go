@@ -8,17 +8,6 @@ import (
 	"net"
 )
 
-type RoomI interface {
-	GetRoomName() string
-	GetNumOfClients() int
-	AddClient()
-	RemoveClient()
-}
-
-type RoomManagerI interface {
-	GetRoom(roomName string) *RoomI
-}
-
 func SendDataToClient(c net.Conn, data []string) {
 	message := common.ServerResponse{Data: data}
 	messageToSend, err := json.Marshal(message)
